@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Assignment6.Core.EmployeeUser>
+
+<div>
+    <h4 style="text-align:center;margin-top:30px">Employee Portal</h4>
+</div>
+<hr />
+<style>
+    .a {
+        text-align:center;
+    }
+</style>
+<p>
+    <div class="a">
+        <button class="btn btn-primary"  onclick="location.href='@Url.Action("Create", "Employee")';return false;">Create Employee</button>
+    </div>
+</p>
+<style>
+   
+    tr:nth-of-type(odd) {
+        background-color:lightgray;
+    }
+    .pagination{
+        margin-left:630px;
+    }
+    #myInput {
+    background: white url(https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_search-16.png) left no-repeat ;
+    
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+</style>
+<input type="text"  class="form-control" id="myInput" onkeyup="myFunction()" placeholder="I am searching for.." > 
+<table class="table" border="1" id="Table" >
+    <tr>
+        
+        <th>
+       &#9660;     @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+       &#9660;      @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+       &#9660;         @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+       &#9660;     @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+       &#9660;         Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm btn-success" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary btn-sm btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class=" container">
+    <ul class="pagination pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+         <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+
+       
+       
+
+    </ul>
+</div>
+@section scripts {
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("Table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+}
