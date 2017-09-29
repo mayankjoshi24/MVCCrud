@@ -22,6 +22,7 @@ namespace Assignment6.Infrastructure
         public void Edit(EmployeeUser p)
         {
             context.Entry(p).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
 
         public EmployeeUser FindById(int Id)
